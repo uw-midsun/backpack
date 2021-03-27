@@ -15,6 +15,7 @@ rm arm-gcc.tar.bz2
 # Install other toolchain pieces
 apt-get -y install minicom
 apt-get -y install openocd
+python3 -m pip install pyusb
 
 # Add minicom configuration
 mkdir -p /etc/minicom
