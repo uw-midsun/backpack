@@ -16,6 +16,12 @@ rm arm-gcc.tar.bz2
 apt-get -y install minicom
 apt-get -y install openocd
 
+# Add minicom configuration
+mkdir -p /etc/minicom
+cat <<EOF | tee /etc/minicom/minirc.dfl
+pu addcarreturn    Yes
+EOF
+
 # Install protobuf-c
 apt-get -y install autoconf
 apt-get -y install libtool
