@@ -9,9 +9,6 @@ crash.log
 
 # For MacOS
 .DS_Store
-<<<<<<< HEAD
 
 # packer
 packer.exe
-=======
->>>>>>> c8d4600f5b12e7fa643e6373bbe327d3748af57c
