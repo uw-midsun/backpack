@@ -8,14 +8,9 @@ autoinstall:
     layout: en
     variant: us
   apt:
-    primary:
-      - arches: [default]
-        uri: http://archive.ubuntu.com/ubuntu/
     sources:
-      ubuntu-toolchain:
+      ubuntu-toolchain-r-test:
         source: ppa:ubuntu-toolchain-r/test
-      maarten-fonville/protobuf:
-        source: ppa:maarten-fonville/protobuf
   network:
     network:
       version: 2

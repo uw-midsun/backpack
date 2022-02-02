@@ -23,9 +23,9 @@
     },
     "builders": [{
         "boot_command": [
-            "<enter><enter><f6><esc><wait>",
-            "autoinstall",
-            "<wait3> ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
+            "<enter><enter><f6><esc><wait3>",
+            "<wait>autoinstall ds=nocloud-net;",
+            "<wait>s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
             "<enter>"
         ],
         "boot_wait": "5s",
@@ -50,6 +50,7 @@
         "type": "virtualbox-iso",
         "vboxmanage": [
             ["modifyvm", "{{.Name}}", "--usb", "on"],
+            ["modifyvm", "{{.Name}}", "--usbehci", "on"],
             ["modifyvm", "{{.Name}}", "--audio", "none"],
             ["modifyvm", "{{.Name}}", "--vram", "16"],
             ["modifyvm", "{{.Name}}", "--vrde", "off"],
@@ -89,3 +90,4 @@
         "output": "backpack.box"
     }]
 }
+
