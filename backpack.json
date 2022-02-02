@@ -1,5 +1,4 @@
 {
-    "_comment": "Build with `packer build ubuntu.json`",
     "variables": {
         "cpus": "1",
         "disable_ipv6": "true",
