@@ -50,6 +50,7 @@
         "type": "virtualbox-iso",
         "vboxmanage": [
             ["modifyvm", "{{.Name}}", "--usb", "on"],
+            ["modifyvm", "{{.Name}}", "--usbehci", "on"],
             ["modifyvm", "{{.Name}}", "--audio", "none"],
             ["modifyvm", "{{.Name}}", "--vram", "16"],
             ["modifyvm", "{{.Name}}", "--vrde", "off"],
