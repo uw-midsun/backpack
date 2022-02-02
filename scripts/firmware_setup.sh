@@ -49,6 +49,7 @@ echo "pu addcarreturn    Yes"
 
 echo "==> Install protobuf things"
 apt-get -y install software-properties-common
+add-apt-repository -y ppa:maarten-fonville/protobuf
 apt-get -y install protobuf-compiler
 apt-get -y install golang-goprotobuf-dev
 python3 -m pip install protobuf
