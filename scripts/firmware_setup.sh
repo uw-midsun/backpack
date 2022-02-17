@@ -5,9 +5,10 @@ apt-get -y install tmux git vim curl scons
 
 echo "==> Install python tooling"
 apt-get -y install python3-pip
-apt-get -y install pylint
-apt-get -y install python3-autopep8
 apt-get -y install virtualenv
+apt-get -y install python3-autopep8
+apt-get -y install pylint
+python3 -m pip install cpplint
 
 echo "==> Install tooling for CAN"
 apt-get -y install can-utils
@@ -45,7 +46,6 @@ apt-get -y install openocd
 echo "==> Setup for minicom"
 touch /etc/minicom/minirc.dfl
 echo "pu addcarreturn    Yes"
-
 
 echo "==> Install protobuf things"
 apt-get -y install software-properties-common
