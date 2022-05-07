@@ -14,6 +14,8 @@ echo "==> Install tooling for CAN"
 apt-get -y install can-utils
 python3 -m pip install python-can
 python3 -m pip install cantools
+python3 -m pip install Jinja2
+python3 -m pip install PyYAML
 
 echo "==> Install go"
 wget https://golang.org/dl/go1.16.2.linux-amd64.tar.gz -O go-zip.tar.gz
@@ -29,6 +31,7 @@ echo "==> Install clang and gcc"
 apt-get -y install gcc-8
 apt-get -y install clang-10
 apt-get -y install clang-format-10
+apt-get -y install gdb
 ln -sf $(which gcc-8) /usr/bin/gcc
 ln -sf $(which clang-10) /usr/bin/clang
 ln -sf $(which clang-format-10) /usr/bin/clang-format
