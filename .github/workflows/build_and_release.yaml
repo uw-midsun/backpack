@@ -9,16 +9,25 @@ on:
   # Allow running this workflow manually
   workflow_dispatch:
 
-env:
-  DEFINES: "DISPLAY=0:.0"
-
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      
+      - name: Fix Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: fix
+      
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: backpack.json
 
       - name: Build box
         uses: hashicorp/packer-github-actions@master
