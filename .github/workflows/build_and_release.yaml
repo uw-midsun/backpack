@@ -17,27 +17,14 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup directories
-        run: |
-          # create directory that will be on the PATH
-          mkdir -p ~/.local/bin
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
-          mkdir -p ~/source
-
-      - name: Install packer and virtualbox
-        run: |
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-          sudo apt-get update
-          sudo apt-get install packer
-          sudo apt-get install virtualbox
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Build box
-        id: build
-        run: |
-          packer build backpack.json
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          target: backpack.json
 
       - name: Release box
         id: release
