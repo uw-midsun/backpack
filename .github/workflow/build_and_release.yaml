@@ -1,0 +1,48 @@
+name: build_and_release
+
+on:
+  # Run on all pull requests and all pushes to master
+  push:
+    branches: [ master ]
+  pull_request:
+
+  # Allow running this workflow manually
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup directories
+        run: |
+          # create directory that will be on the PATH
+          mkdir -p ~/.local/bin
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+          mkdir -p ~/source
+
+      - name: Install packer and virtualbox
+        run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update
+          sudo apt-get install packer
+          sudo apt-get install virtualbox
+
+      - name: Build box
+        id: build
+        run: |
+          packer build backpack.json
+
+      - name: Release box
+        id: release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./backpack.box
+          asset_name: backpack.box
+          asset_content_type: application/octet-stream
