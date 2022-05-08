@@ -27,6 +27,7 @@ jobs:
       - name: Install virtualbox
         run: |
           sudo apt-get install virtualbox
+          hash -r
       
       - name: Fix Template
         uses: hashicorp/packer-github-actions@master
