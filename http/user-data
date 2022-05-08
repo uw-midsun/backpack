@@ -1,0 +1,29 @@
+#cloud-config
+autoinstall:
+  version: 1
+  early-commands:
+    - sudo systemctl stop ssh
+  locale: en_US
+  keyboard:
+    layout: en
+    variant: us
+  apt:
+    sources:
+      ubuntu-toolchain-r-test:
+        source: ppa:ubuntu-toolchain-r/test
+  network:
+    network:
+      version: 2
+      ethernets:
+        enp0s3:
+          dhcp4: true
+  ssh:
+    install-server: true
+  identity:
+    hostname: vagrant
+    username: vagrant
+    password: $6$r0.SCOWKMTrHIpz$JCnAEUhC6P5RuZAihFyITQztGyaydcNMNWwp0DhmpHZFoWAIgd7Z8Yup.fVmivsbqYbYg0Do47uzY7s1m0SOR.
+  late-commands:
+    - "echo 'Defaults:vagrant !requiretty' > /target/etc/sudoers.d/vagrant"
+    - "echo 'vagrant ALL=(ALL) NOPASSWD: ALL' >> /target/etc/sudoers.d/vagrant"
+    - "chmod 440 /target/etc/sudoers.d/vagrant"

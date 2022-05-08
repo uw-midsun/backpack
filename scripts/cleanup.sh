@@ -1,14 +1,9 @@
 #!/bin/bash -eu
-# source: https://github.com/heizo/packer-ubuntu-18.04/blob/master/script/cleanup.sh
 
 SSH_USER=${SSH_USERNAME:-vagrant}
 
 echo "==> Cleaning up tmp"
 rm -rf /tmp/*
-
-# Cleanup apt cache
-apt-get -y autoremove --purge
-apt-get -y clean
 
 echo "==> Installed packages"
 dpkg --get-selections | grep -v deinstall
@@ -26,19 +21,19 @@ find /var/log -type f -exec truncate --size=0 {} \;
 
 echo '==> Clear out swap and disable until reboot'
 set +e
-swapuuid=$(/sbin/blkid -o value -l -s UUID -t TYPE=swap)
+swapuuid=$(blkid -o value -l -s UUID -t TYPE=swap)
 case "$?" in
     2|0) ;;
     *) exit 1 ;;
 esac
 set -e
-if [ "x${swapuuid}" != "x" ]; then
+if [ "x$swapuuid" != "x" ]; then
     # Whiteout the swap partition to reduce box size
     # Swap is disabled till reboot
-    swappart=$(readlink -f /dev/disk/by-uuid/$swapuuid)
-    /sbin/swapoff "${swappart}"
-    dd if=/dev/zero of="${swappart}" bs=1M || echo "dd exit code $? is suppressed"
-    /sbin/mkswap -U "${swapuuid}" "${swappart}"
+    swappart=$(readlink -f /dev/disk/by-uuid/${swapuuid})
+    swapoff $swappart
+    dd if=/dev/zero of=$swappart bs=1M || echo "dd exit code $? is suppressed"
+    mkswap -U $swapuuid $swappart
 fi
 
 # Zero out the free space to save space in the final image
