@@ -9,6 +9,9 @@ on:
   # Allow running this workflow manually
   workflow_dispatch:
 
+env:
+  DEFINES: "DISPLAY=0:.0"
+
 jobs:
   build:
     runs-on: ubuntu-20.04
