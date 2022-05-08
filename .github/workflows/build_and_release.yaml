@@ -20,9 +20,9 @@ jobs:
       - name: Install virtualbox
         run: |
           sudo apt-get install virtualbox
-          curl https://download.virtualbox.org/virtualbox/6.1.34/Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack -o vbox_ext.vbox-extpack
+          curl https://download.virtualbox.org/virtualbox/6.1.34/Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack
           hash -r
-          sudo VBoxManage extpack install --replace vbox_ext.vbox-extpack
+          sudo VBoxManage extpack install --replace Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack
 
       - name: Build box
         uses: hashicorp/packer-github-actions@master
