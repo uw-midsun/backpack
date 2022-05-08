@@ -22,7 +22,7 @@ jobs:
           sudo apt-get install virtualbox
           curl https://download.virtualbox.org/virtualbox/6.1.34/Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack -o Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack
           hash -r
-          sudo VBoxManage extpack install --replace Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack -y
+          sudo VBoxManage extpack install --replace --accept-license=sha256 Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack
 
       - name: Build box
         uses: hashicorp/packer-github-actions@master
