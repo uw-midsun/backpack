@@ -31,6 +31,7 @@ jobs:
           hash -r
           echo "y" | sudo VBoxManage extpack install --replace Oracle_VM_VirtualBox_Extension_Pack-6.1.34.vbox-extpack
           VBoxManage
+          echo $PATH
 
       - name: Build box
         uses: hashicorp/packer-github-actions@master
