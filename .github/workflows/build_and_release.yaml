@@ -38,7 +38,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          target: backpack.json
+          target: backpack.pkr.hcl
 
       - name: Release box
         id: release
