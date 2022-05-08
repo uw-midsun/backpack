@@ -12,3 +12,4 @@ crash.log
 
 # packer
 packer.exe
+output-packer-ubuntu-20.04-amd64-virtualbox-iso
